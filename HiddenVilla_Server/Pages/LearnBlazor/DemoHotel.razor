@@ -12,6 +12,14 @@
         }
     </div>
 
+    <h2 class="text-info">Hotel Amenities</h2>
+    <div class="row container">
+        @foreach (var a in Amenities)
+        {
+            <RoomAmenity amenity="@a"></RoomAmenity>
+        }
+    </div>
+
 </div>
 
 
@@ -19,6 +27,7 @@
 @code {
 
     List<BlazorRoom> Rooms = new List<BlazorRoom>();
+    List<Amenity> Amenities = new List<Amenity>();
 
     protected override void OnInitialized()
     {
@@ -30,7 +39,7 @@
             IsActive = true,
             Price = 399,
             RoomProps = new List<BlazorRoomProp>
-    {
+{
                 new BlazorRoomProp() {Id = 1, Name="Sq Ft", Value="330"},
                 new BlazorRoomProp() {Id = 2, Name="Occupancy", Value="4"}
             }
@@ -42,10 +51,16 @@
             IsActive = true,
             Price = 699,
             RoomProps = new List<BlazorRoomProp>
-    {
+{
                 new BlazorRoomProp() {Id = 1, Name="Sq Ft", Value="1500"},
                 new BlazorRoomProp() {Id = 2, Name="Occupancy", Value="6"}
             }
         });
+
+
+
+        Amenities.Add(new Amenity { Id = 1, Name = "Pool", Description = "Super nice" });
+        Amenities.Add(new Amenity { Id = 2, Name = "Free Breakfast", Description = "Continintal of course" });
+        Amenities.Add(new Amenity { Id = 3, Name = "Gym", Description = "Get SWOLE!" });
     }
 }
