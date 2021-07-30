@@ -1,0 +1,51 @@
+﻿@page "/demoHotel"
+@using Model
+
+
+
+<div class="border p-2 mt-2" style="background-color:azure">
+    <h2 class="text-info">Room List [Using Component]</h2>
+    <div class="row container">
+        @foreach (var room in Rooms)
+        {
+            <IndividualRoom Room="@room"></IndividualRoom>
+        }
+    </div>
+
+</div>
+
+
+
+@code {
+
+    List<BlazorRoom> Rooms = new List<BlazorRoom>();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Rooms.Add(new BlazorRoom()
+        {
+            Id = 201,
+            RoomName = "Villa Suite One Bedroom",
+            IsActive = true,
+            Price = 399,
+            RoomProps = new List<BlazorRoomProp>
+    {
+                new BlazorRoomProp() {Id = 1, Name="Sq Ft", Value="330"},
+                new BlazorRoomProp() {Id = 2, Name="Occupancy", Value="4"}
+            }
+        });
+        Rooms.Add(new BlazorRoom()
+        {
+            Id = 2,
+            RoomName = "Villa Suite Two Bedroom",
+            IsActive = true,
+            Price = 699,
+            RoomProps = new List<BlazorRoomProp>
+    {
+                new BlazorRoomProp() {Id = 1, Name="Sq Ft", Value="1500"},
+                new BlazorRoomProp() {Id = 2, Name="Occupancy", Value="6"}
+            }
+        });
+    }
+}
