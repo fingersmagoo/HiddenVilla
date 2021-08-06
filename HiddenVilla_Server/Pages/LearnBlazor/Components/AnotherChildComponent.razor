@@ -1,0 +1,11 @@
+﻿<div>
+    <h4 class="text-primary pt-3">Another Child Componet</h4>
+    <input id="roomName" @attributes="InputAttributes" placeholder="Inital Text" class="form-control"/>
+</div>
+
+@code {
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> InputAttributes { get; set; } = new Dictionary<string, object>();
+
+}

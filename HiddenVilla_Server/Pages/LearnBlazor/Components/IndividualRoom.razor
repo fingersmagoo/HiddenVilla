@@ -1,4 +1,5 @@
 ﻿<div class="bg-light border p-2 col-5">
+    <input type="checkbox" @onchange="RoomCheckBoxSelectionChanged" />
     <h4 class="text-secondary">Room - @Room.Id</h4>
     @Room.Id<br />
     @Room.Price.ToString("c")<br />
@@ -18,4 +19,11 @@
 @code {
     [Parameter]
     public BlazorRoom Room { get; set; }
+    [Parameter]
+    public EventCallback<bool> OnRoomCheckboxSelection { get; set;}
+
+    protected async Task RoomCheckBoxSelectionChanged(ChangeEventArgs e)
+    {
+        await OnRoomCheckboxSelection.InvokeAsync((bool)e.Value);
+    }
 }

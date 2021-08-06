@@ -1,11 +1,25 @@
-﻿<div class="bg-light border p-2 col-5">
+﻿<div class="bg-light border p-2 col-5" @onclick="(args)=>AmenitySelectionChanged(args, amenity.Name)">
     <h4 class="text-secondary">Amenity - @amenity.Id</h4>
     @amenity.Name<br />
     @amenity.Description<br />
-
+    RF from Parent - #@R1 #@R2
 </div>
 
 @code {
     [Parameter]
     public Amenity amenity { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnAmenitySelection { get; set; }
+
+    protected async Task AmenitySelectionChanged(MouseEventArgs e, string name)
+    {
+        await OnAmenitySelection.InvokeAsync(name);
+    }
+
+    [Parameter]
+    public RenderFragment R1 { get; set; }
+
+    [Parameter]
+    public RenderFragment R2 { get; set; }
 }

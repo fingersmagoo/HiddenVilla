@@ -6,9 +6,13 @@
 <div class="border p-2 mt-2" style="background-color:azure">
     <h2 class="text-info">Room List [Using Component]</h2>
     <div class="row container">
+        <div  class="col-12">
+            <h4 class="text-info">Hotel Room's</h4>
+            <span>Rooms Selected - @SelectedRooms</span>
+        </div>
         @foreach (var room in Rooms)
         {
-            <IndividualRoom Room="@room"></IndividualRoom>
+            <IndividualRoom Room="@room" OnRoomCheckboxSelection="RoomSelectionCounterChanged"></IndividualRoom>
         }
     </div>
 
@@ -16,15 +20,23 @@
     <div class="row container">
         @foreach (var a in Amenities)
         {
-            <RoomAmenity amenity="@a"></RoomAmenity>
+            <RoomAmenity amenity="@a" OnAmenitySelection="AmenitySelectionChanged">
+                <R1>1</R1>
+                <R2>2</R2>
+            </RoomAmenity>
         }
     </div>
 
 </div>
 
-
+<div class="col-12">
+        <p class="text-secondary">Selected Amenity: @SelectedAmenity</p>
+</div>
 
 @code {
+    public int SelectedRooms { get; set; } = 0;
+
+    public string SelectedAmenity { get; set; }
 
     List<BlazorRoom> Rooms = new List<BlazorRoom>();
     List<Amenity> Amenities = new List<Amenity>();
@@ -62,5 +74,16 @@
         Amenities.Add(new Amenity { Id = 1, Name = "Pool", Description = "Super nice" });
         Amenities.Add(new Amenity { Id = 2, Name = "Free Breakfast", Description = "Continintal of course" });
         Amenities.Add(new Amenity { Id = 3, Name = "Gym", Description = "Get SWOLE!" });
+    }
+    protected void RoomSelectionCounterChanged(bool isRoomSelected)
+    {
+        if (isRoomSelected)
+            SelectedRooms++;
+        else
+            SelectedRooms--;
+    }
+    protected void AmenitySelectionChanged(string a)
+    {
+        SelectedAmenity = a;
     }
 }
